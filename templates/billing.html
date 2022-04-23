@@ -1,0 +1,141 @@
+{% extends "appointmentlayout.html" %}
+
+{% block body %}
+<div class="container" style="margin-top: 5%;">
+<div style=" text-align: center;">
+    <h1 style="color: rgb(7, 7, 141);"> Search Appointment's Bill</h1>
+
+ <div style="margin-left: -10px;">
+    <form action="" method="POST">
+        <label for="customer_id" style="font-weight: bold; font-size: large; color: red;">ID</label>
+&nbsp;&nbsp;        <input class="text" type="text" name="id" id="id"><br><br>
+        <button class="button" type="submit"  >Search </button>
+    </form>
+</div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}<br>
+        <p style="color: rgb(255, 5, 5);text-align: center; font-weight: bolder;"> <strong>{{ msg }}</strong> </p>
+        {% endfor %}
+{% endif %}
+{% endwith%}
+<br>
+
+<div >
+    {% if patient %}
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>SSN ID</th>
+            <th>DOCTOR NAME</th>
+            <th>ADDRESS</th>
+            <th>STATUS</th>
+            <th>APPOINTMENT DATE</th>
+            
+        </tr>
+        
+        <tr>
+            <td> {{ patient.id }} </td>
+            <td> {{ patient.ssn_id }} </td>
+            <td> {{ patient.pname }} </td>
+            <td> {{ patient.address }}</td>
+            <td> {{ patient.status }} </td>
+            <td> {{ y }} </td>
+        </tr>
+
+        <tr>
+            
+        </tr>
+        
+    </table>
+
+    
+</div>
+
+    {% else %}
+
+                <h3></h3>
+
+    {% endif %}
+    
+   <div> 
+        <br><br>
+        {% if med %}
+        <p style="color: rgb(248, 11, 11);text-align: left;"> <strong>Medicines Issued</strong> </p>
+        <table class="table" border="1">
+            <tr>
+                <th> ID </th>
+                <th> NAME </th>
+                <th> QUANTITY ISSUED </th>
+                <th>ISSUED DATE</th>
+                <th> RATE </th>
+                <th> TOTAL </th>
+            </tr>
+            {% for med in med %}
+            <tr>
+                <td> {{ med.mid }} </td>
+                <td> {{ med.mname }} </td>
+                <td> {{ med.qissued }} </td>
+                <td> {{ med.date }} </td>
+                <td> {{ med.rate }}.00 </td>
+                <td> {{ med.qissued * med.rate }}.00 /- </td>
+            </tr>
+            {% else %}
+                <h4>No Medicines issued  </h4> 
+            {% endfor %}
+        </table>
+        {% endif %}
+    
+        <br><br>
+        {% if dia %}
+        <p style="color: rgb(248, 11, 11);text-align: left;"> <strong>Diagnostics Issued</strong> </p>
+        <table class="table" border="1">
+            <tr>
+                <th> ID </th>
+                <th> NAME </th>
+                <th>ISSUED DATE</th>
+                <th> RATE </th>
+            </tr>
+            {% for dia in dia %}
+            <tr>
+                <td> {{ dia.tid }} </td>
+                <td> {{ dia.tname }} </td>
+                <td> {{ dia.date }} </td>
+                <td> {{ dia.tcharge }}.00 </td>
+            </tr>
+            {% else %}
+                <h4>No Tests issued  </h4> 
+            {% endfor %}
+        </table>
+        {% endif %}
+    
+       </div>
+
+       <div>
+           {% if patient %}
+
+           <h1 style="text-align: center; color: rgb(247, 247, 247); background-color: rgb(253, 0, 0);" >TOTAL BILL</h1>
+           <table >
+                <tr>
+                    <th> MEDICINES TOTAL </th>
+                    <th> DIAGNOSTICS TOTAL </th>
+                    <th> GRAND TOTAL </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td> {{ mtot }}/- </td>
+                    <td> {{tot}}/- </td>
+                    <td> {{ mtot + tot }}.00/- </td>
+                    <td> <a class="rbutton" href={{ url_for('home') }}>Back</a></td>
+                    
+                </tr>
+           </table>
+           {% endif %}
+       </div>
+
+
+</div>
+<br><br><br>
+{% endblock %}

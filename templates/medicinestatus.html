@@ -1,0 +1,32 @@
+{% extends "appointmentlayout.html" %}
+
+{% block body %}
+
+   <div class="container" style="margin-top: 5%;">
+    <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default" style="padding: 15px;">
+              <div class="table-responsive">
+              <table class="table table-striped">
+                  <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>QTY AVAILABLE</th>
+                    <th>PRICE</th>
+                  </tr>
+                  {% for update in updatep %}
+                  <tr>
+                    <td> {{ update.mid }} </td>
+                    <td> {{ update.mname }} </td>
+                    <td> {{ update.qavailable }} </td>
+                    <td> {{ update.rate }} </td>
+                  </tr>
+                  {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
